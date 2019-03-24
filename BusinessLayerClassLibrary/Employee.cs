@@ -21,7 +21,18 @@ namespace BusinessLayerClassLibrary
 
         public void DeleteEmployee(int Empid)
         {
-            throw new NotImplementedException();
+            //Step 1:Connect to DB and Open the connection
+            string connString = "Data source=Anji\\SQLEXPRESS; Initial catalog=chanduDB;User ID=sa;Password=12345";
+            SqlConnection sqlConn = new SqlConnection(connString);
+            sqlConn.Open();
+            //Step 2:Execute insertCommand by passing insertQuery
+            string deletequery = "delete EmployeeList where EmpID='" + Empid + "'";
+            SqlCommand deletecommand = new SqlCommand(deletequery, sqlConn);
+            deletecommand.ExecuteNonQuery();
+            //Step 3:Dispose SqlCommand and close the connection 
+            deletecommand.Dispose();
+            sqlConn.Close();
+            
         }
 
         public void GetAllEmployees()

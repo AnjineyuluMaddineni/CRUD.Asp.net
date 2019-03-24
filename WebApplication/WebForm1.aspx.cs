@@ -65,19 +65,17 @@ namespace WebApplication
 
         protected void Button3_Click(object sender, EventArgs e)
         {
-            //Step 1:Connect to DB and Open the connection
-            string connString = "Data source=Anji\\SQLEXPRESS; Initial catalog=chandu;User ID=sa;Password=12345";
-            SqlConnection sqlConn = new SqlConnection(connString);
-            sqlConn.Open();
-            //Step 2:Execute insertCommand by passing insertQuery
-            string empid = TextBox7.Text.ToString();
-            string deletequery = "delete EmployeeList where EmpID='" + TextBox7.Text + "'";
-            SqlCommand deletecommand = new SqlCommand(deletequery, sqlConn);
-            deletecommand.ExecuteNonQuery();
-            //Step 3:Dispose SqlCommand and close the connection 
-            deletecommand.Dispose();
-            sqlConn.Close();
-            Label4.Text = "Delete successfully";
+            Employee obj = new Employee();
+            int empId = int.Parse(TextBox7.Text);
+            try
+            {
+                obj.DeleteEmployee(empId);
+                Label4.Text = "Delete successfully";
+            }
+            catch (Exception ex)
+            {
+                Label4.Text = ex.Message.ToString();
+            }
         }
 
         protected void Button4_Click(object sender, EventArgs e)
@@ -89,9 +87,9 @@ namespace WebApplication
             string selectQuery = "select* from EmployeeList";
             SqlCommand selectCommand = new SqlCommand(selectQuery, sqlConn);
             SqlDataReader sqlReader = selectCommand.ExecuteReader();
-            GridView1.DataSource = sqlReader;
-            GridView1.DataBind();
+
             sqlConn.Close();
+
 
         }
     }
