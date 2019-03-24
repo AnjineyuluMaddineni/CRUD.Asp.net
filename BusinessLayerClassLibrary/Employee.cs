@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using System.Configuration;
 
 namespace BusinessLayerClassLibrary
 {
@@ -21,8 +22,9 @@ namespace BusinessLayerClassLibrary
 
         public void DeleteEmployee(int Empid)
         {
+            string connString = ConfigurationManager.ConnectionStrings["AnjiSQLConnectionString"].ConnectionString;
             //Step 1:Connect to DB and Open the connection
-            string connString = "Data source=Anji\\SQLEXPRESS; Initial catalog=chanduDB;User ID=sa;Password=12345";
+            //string connString = "Data source=Anji\\SQLEXPRESS; Initial catalog=chanduDB;User ID=sa;Password=12345";
             SqlConnection sqlConn = new SqlConnection(connString);
             sqlConn.Open();
             //Step 2:Execute insertCommand by passing insertQuery

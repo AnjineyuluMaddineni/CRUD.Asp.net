@@ -6,14 +6,16 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
+using System.Configuration;
 
 namespace WebApplication
 {
     public partial class WebForm1 : System.Web.UI.Page
     {
+        private string connString;
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            connString = ConfigurationManager.ConnectionStrings["AnjiSQLConnectionString"].ConnectionString;
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -26,7 +28,7 @@ namespace WebApplication
         protected void btnInsertEmployee_Click(object sender, EventArgs e)
         {
             //Step 1:Connect to DB and Open the connection
-            string connString = "Data source=Anji\\SQLEXPRESS; Initial catalog=chandu;User ID=sa;Password=12345";
+            //string connString = "Data source=Anji\\SQLEXPRESS; Initial catalog=chandu;User ID=sa;Password=12345";
             SqlConnection sqlConn = new SqlConnection(connString);
             sqlConn.Open();
             //Step 2:Execute insertCommand by passing insertQuery
@@ -47,7 +49,7 @@ namespace WebApplication
         protected void Button2_Click(object sender, EventArgs e)
         {
             //Step 1:Connect to DB and Open the connection
-            string connString = "Data source=Anji\\SQLEXPRESS; Initial catalog=chandu;User ID=sa;Password=12345";
+            //string connString = "Data source=Anji\\SQLEXPRESS; Initial catalog=chandu;User ID=sa;Password=12345";
             SqlConnection sqlConn = new SqlConnection(connString);
             sqlConn.Open();
             //Step 2:Execute insertCommand by passing insertQuery
@@ -81,7 +83,7 @@ namespace WebApplication
         protected void Button4_Click(object sender, EventArgs e)
         {
             //Step 1:Connect to DB and Open the connection
-            string connString = "Data source=Anji\\SQLEXPRESS; Initial catalog=chandu;User ID=sa;Password=12345";
+            //string connString = "Data source=Anji\\SQLEXPRESS; Initial catalog=chandu;User ID=sa;Password=12345";
             SqlConnection sqlConn = new SqlConnection(connString);
             sqlConn.Open();
             string selectQuery = "select* from EmployeeList";
